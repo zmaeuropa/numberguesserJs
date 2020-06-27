@@ -16,6 +16,13 @@ const game = document.querySelector('#game');
 minNum.textContent = min;
 maxNum.textContent = max;
 
+//Play again event listener
+game.addEventListener('mousedown', function(e) {
+    if (e.target.className === 'play-again') {
+        window.location.reload();
+    }
+})
+
 // Listen for guess
 guessBtn.addEventListener('click', function() {
     
@@ -23,7 +30,9 @@ guessBtn.addEventListener('click', function() {
 
     // Validate input
     if (isNaN(guess) || guess < min || guess > max) {
-        setMessage(`Please enter a number between ${min} and ${max}`, 'red')
+        console.log(guess);
+        setMessage(`Please enter a number between ${min} and ${max}`);
+        
     }
 
     // Check if won
@@ -58,8 +67,15 @@ function gameOver(won,msg) {
      guessInput.disabled = true;
      // Change border color
      guessInput.style.borderColor = color;
+     // Set text color
+    message.style.color = color;
      // Set message
      setMessage(msg);
+
+     //Play again
+     guessBtn.value = 'Play again';
+     guessBtn.className += 'play-again';
+
 }
 
 // Set message 
